@@ -19,3 +19,11 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
+
+#amplify
+amplify/*
+build/
+dist/
+node_modules/
+aws-exports.js
+awsconfiguration.json
