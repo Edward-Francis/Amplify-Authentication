@@ -5,14 +5,14 @@
       <v-text-field v-model="username" :rules="emailRules" label="Email-Address" required />
       <v-text-field
         v-model="password"
-        :append-icon="passwordVisible ? 'visibility' : 'visibility_off'"
+        :append-icon="passwordVisable ? 'visibility' : 'visibility_off'"
         :rules="[passwordRules.required, passwordRules.min]"
         :type="passwordVisable ? 'text' : 'password'"
         name="password"
         label="Password"
         hint="At least 8 characters"
         counter
-        @click:append="passwordVisable = !passwordVisible"
+        @click:append="passwordVisable = !passwordVisable"
         required
       />
       <v-btn :disabled="!valid" @click="submit">Submit</v-btn>
@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import { signUp } from "@/utils/auth.js";
 export default {
   name: "SignUp",
   data() {
@@ -52,6 +53,7 @@ export default {
         console.log(
           "SIGN UP username: ${this.username}, password: ${this.password}, email: ${this.username}`"
         );
+        signUp(this.username, this.password);
       }
     }
   }

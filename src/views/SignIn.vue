@@ -2,17 +2,22 @@
   <div class="sign-in">
     <h1>Sign In</h1>
     <v-form v-model="valid" ref="form" lazy-validation>
-      <v-text-field v-model="username" :rules="emailRules" label="Email Address" required />
+      <v-text-field
+        v-model="username"
+        :rules="emailRules"
+        label="Email Address"
+        required
+      />
       <v-text-field
         v-model="password"
-        :append-icon="passwordVisible ? 'visibility' : 'visibility_off'"
+        :append-icon="passwordVisable ? 'visibility' : 'visibility_off'"
         :rules="[passwordRules.required, passwordRules.min]"
-        :type="passwordVisible ? 'text' : 'password'"
+        :type="passwordVisable ? 'text' : 'password'"
         name="password"
         label="Password"
         hint="At least 8 characters"
         counter
-        @click:append="passwordVisible = !passwordVisible"
+        @click:append="passwordVisable = !passwordVisable"
         required
       />
       <v-btn :disabled="!valid" @click="submit">Submit</v-btn>
@@ -21,6 +26,7 @@
 </template>
 
 <script>
+import { signIn } from "@/utils/auth.js";
 export default {
   name: "SignIn",
   data() {
@@ -52,6 +58,7 @@ export default {
         console.log(
           "SIGN IN username: ${this.username}, password: ${this.password}"
         );
+        signIn(this.username, this.password);
       }
     }
   }
